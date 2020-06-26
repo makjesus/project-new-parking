@@ -4,20 +4,25 @@
 
     const $ = q => document.querySelector(q)
 
-    function addCarGarage(car){
+    function addCarToGarage(car){
         const row = document.createElement('tr')
 
         row.innerHTML = `
             <td>${car.name}</td>
             <td>${car.licence}</td>
-            <td>${car.time}</td>
+            <td>${new Date(car.time)
+                .toLocaleTimeString('pt-BR' ,{
+                   hour: 'numeric', minute:'numeric' 
+
+                })}</td>
 
             <td>
                 <button class = 'delete'>x</button>
             </td>    
 
-            $(#garage).appendChild(row)
-        `
+        `;
+
+        $('#garage').appendChild(row)
     }
 
     $('#send').addEventListener('click', e => {
@@ -37,7 +42,7 @@
         localStorage.garage = JSON.stringify(garage)
         console.log(garage)
 
-        addCarGarage(car)
+        addCarToGarage(car)
 
         $('#name').value = ''
         $('#licence').value = ''

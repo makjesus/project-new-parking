@@ -37,7 +37,6 @@
     
     renderGarage()    
     $('#send').addEventListener('click', e => {
-
         const name = $('#name').value
         const licence = $('#licence').value
 
@@ -46,12 +45,12 @@
             return
         }
 
-        const car = {name,licence,time : new Date }
+        const car = {name,licence,time : new Date() }
 
         const garage = getGarage()
         garage.push(car)
+
         localStorage.garage = JSON.stringify(garage)
-        console.log(garage)
 
         addCarToGarage(car)
 

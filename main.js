@@ -4,6 +4,14 @@
 
     const $ = q => document.querySelector(q)
 
+    function rederGarage(){
+
+        const garage = getGarage()
+
+        garage.forEach(c => addCarToGarage(c))
+
+    }
+
     function addCarToGarage(car){
         const row = document.createElement('tr')
 
@@ -11,7 +19,7 @@
             <td>${car.name}</td>
             <td>${car.licence}</td>
             <td>${new Date(car.time)
-                .toLocaleTimeString('pt-BR' ,{
+                .toLocaleString('pt-BR' ,{
                    hour: 'numeric', minute:'numeric' 
 
                 })}</td>
@@ -25,6 +33,9 @@
         $('#garage').appendChild(row)
     }
 
+    const getGarage = () => localStorage.garage ? JSON.parse(localStorage.garage): []
+    
+    renderGarage()    
     $('#send').addEventListener('click', e => {
 
         const name = $('#name').value
@@ -37,7 +48,7 @@
 
         const car = {name,licence,time : new Date }
 
-        const garage = localStorage.garage ? JSON.parse(localStorage.garage) : []
+        const garage = getGarage()
         garage.push(car)
         localStorage.garage = JSON.stringify(garage)
         console.log(garage)
